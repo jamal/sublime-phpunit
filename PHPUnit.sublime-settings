@@ -4,6 +4,7 @@
     "max_search_secs": 2,
     "phpunit_xml_location_hints": [ "app" ],
     "phpunit_additional_args": {},
+    "phpunit_xml_filename": [ "phpunit.xml", "phpunit.xml.dist" ],
     "copy_env": true,
     "override_env": {},
     "debug": 0

@@ -24,6 +24,7 @@ class Prefs:
         Prefs.path_to_phpunit = settings.get('path_to_phpunit', False)
         Prefs.copy_env = settings.get('copy_env', True)
         Prefs.override_env = settings.get('override_env', {})
+        Prefs.phpunit_xml_filename = settings.get('phpunit_xml_filename', [])
 
         # which version of ST are we working inside?
         if sys.version_info[0] == 2:
@@ -534,7 +535,7 @@ class ActiveFile:
             Msgs.debug_msg("Buffer is not phpunit.xml; is not a real file")
             return False
         filename = os.path.basename(filename)
-        if filename == 'phpunit.xml' or filename == 'phpunit.xml.dist':
+        if filename in Prefs.phpunit_xml_location_hints:
             Msgs.debug_msg("Buffer is a phpunit.xml file")
             return True
         Msgs.debug_msg("Buffer is not a phpunit.xml file")
@@ -558,7 +559,7 @@ class ActiveFile:
         Msgs.debug_msg("Looking for phpunit.xml of some kind")
 
         # what are we looking for?
-        files_to_find = ['phpunit.xml', 'phpunit.xml.dist']
+        files_to_find = Prefs.phpunit_xml_filename
 
         return FindFiles.find(self.top_folder(), search_from, files_to_find)
 
